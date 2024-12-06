@@ -1,81 +1,95 @@
-# Application_models_machine_learning
-Application of machine learning models to the Moroccan real estate market
+# Projet de Nettoyage et Analyse des Données Immobilières  
 
+Ce projet vise à renforcer vos compétences en manipulation et analyse de données, modélisation statistique et application de techniques de machine learning pour résoudre des problèmes réels dans le domaine de l'immobilier.  
 
-# Dans ce projet, vous allez exploiter une base de données immobilière pour développer deux modèles de machine learning intégrés. Premièrement, vous créerez un modèle de régression linéaire multiple pour prédire le prix des biens immobiliers en fonction de diverses caractéristiques (nombre de pièces, surface, localisation, etc.). Deuxièmement, vous développerez un modèle de classification pour prédire la présence d'un équipement spécifique, comme un ascenseur, dans une annonce immobilière. Ce projet vous permettra d'appliquer des techniques de machine learning pour résoudre des problèmes réels et de renforcer vos compétences en analyse de données et en modélisation prédictive.
+## Table des Matières  
+- [Contexte du Projet](#contexte-du-projet)  
+- [Objectifs](#objectifs)  
+- [Tâches à Réaliser](#tâches-à-réaliser)  
+  - [Connexion à la Base de Données](#connexion-à-la-base-de-données)  
+  - [Exploration et Compréhension des Données](#exploration-et-compréhension-des-données)  
+  - [Prétraitement des Données](#prétraitement-des-données)  
+  - [Modélisation](#modélisation)  
+    - [Régression Linéaire Multiple](#régression-linéaire-multiple)  
+    - [Classification](#classification)  
+  - [Analyse et Interprétation](#analyse-et-interprétation)  
+  - [Visualisation des Résultats](#visualisation-des-résultats)  
+  - [Amélioration des Modèles](#amélioration-des-modèles)  
+- [Documentation et Reproductibilité](#documentation-et-reproductibilité)  
+- [Réflexion sur les Biais et l'Éthique](#réflexion-sur-les-biais-et-léthique)  
+- [Technologies Utilisées](#technologies-utilisées)  
+- [Installation](#installation)  
+- [Utilisation](#utilisation)  
+- [Licence](#licence)  
 
+## Contexte du Projet  
+Le projet s'inscrit dans un cadre éducatif et a pour objectif d'explorer les données issues de l'immobilier tout en appliquant des techniques avancées de machine learning et de statistiques pour résoudre des problématiques concrètes.  
 
-# Contexte du projet
-Ce projet vous permettra de renforcer vos compétences en manipulation et analyse de données, en modélisation statistique, et en application de techniques de machine learning pour résoudre des problèmes réels.
+## Objectifs  
+- Comprendre les relations entre les variables pour prédire les prix immobiliers.  
+- Identifier les facteurs influençant la présence d’équipements spécifiques.  
+- Fournir des recommandations basées sur des analyses de données fiables et reproductibles.  
 
-# Tâches à réaliser :
+## Tâches à Réaliser  
 
-# Connexion à la base de données :
+### Connexion à la Base de Données  
+- Utiliser **SQLAlchemy** pour se connecter à une base de données PostgreSQL.  
+- Importer les tables nécessaires : `Annonce`, `Ville`, `Équipement`, et `AnnonceEquipement`.  
 
-Connectez-vous à la base de données PostgreSQL en utilisant SQLAlchemy.
-Importez les données nécessaires pour votre analyse depuis les tables Annonce, Ville, Équipement, et AnnonceEquipement.
-# Exploration et compréhension des données :
+### Exploration et Compréhension des Données  
+- Examiner la structure des données et les relations entre les tables.  
+- Identifier les variables clés pour les modèles de régression et de classification.  
 
-Examinez la structure des données et comprenez les relations entre les différentes tables.
-Identifiez les variables clés pour les deux modèles (régression et classification).
-# Prétraitement des données :
+### Prétraitement des Données  
+1. **Gestion des valeurs manquantes** :  
+   - Décider de la gestion des annonces avec un prix "PRIX NON SPÉCIFIÉ".  
+2. **Transformation des variables** :  
+   - Convertir les dates en composantes utiles (année, mois, jour).  
+   - Encoder les variables catégorielles (`city_id`) avec des méthodes adaptées.  
+   - Créer des variables binaires pour la présence ou l'absence d’équipements.  
+3. **Normalisation/Standardisation** :  
+   - Appliquer des transformations aux variables numériques si nécessaire.  
 
-# Gestion des valeurs manquantes :
-Traitez les annonces dont le prix est "PRIX NON SPÉCIFIÉ" en décidant de les exclure ou d'imputer une valeur appropriée.
-# Transformation des variables :
-Convertissez la variable datetime en composantes utiles (année, mois, jour).
-Encodez les variables catégorielles comme city_id en utilisant un encodage approprié (one-hot encoding, label encoding).
-Créez des variables binaires pour les équipements (présence ou absence d'un équipement dans une annonce).
-# Normalisation/Standardisation :
-Appliquez une normalisation ou une standardisation aux variables numériques si nécessaire.
-# Développement du modèle de régression linéaire multiple :
+### Modélisation  
 
-# Sélection des variables :
-Choisissez les variables indépendantes pertinentes pour prédire le prix (nb_rooms, nb_baths, surface_area, city_id, etc.).
-# Division des données :
-Séparez les données en ensembles d'entraînement et de test (par exemple, 80% entraînement, 20% test).
-# Entraînement du modèle :
-Entraînez le modèle de régression linéaire multiple sur l'ensemble d'entraînement.
-# Évaluation du modèle :
-Calculez les métriques de performance telles que l'erreur quadratique moyenne (MSE) et le coefficient de détermination (R²) sur l'ensemble de test.
-Visualisez les résultats en comparant les prix prévus aux prix réels.
-# Développement du modèle de classification :
+#### Régression Linéaire Multiple  
+- **Sélection des Variables** : Identifier les variables pertinentes (e.g., `nb_rooms`, `surface_area`).  
+- **Division des Données** : Séparer en ensembles d’entraînement (80%) et de test (20%).  
+- **Entraînement et Évaluation** : Entraîner un modèle de régression linéaire et évaluer sa performance (MSE, R²).  
 
-# Création de la variable cible :
-Sélectionnez un équipement spécifique (par exemple, un ascenseur) et créez une variable cible binaire has_elevator indiquant sa présence (1) ou son absence (0) dans une annonce.
-# Gestion du déséquilibre des classes :
-Vérifiez si les classes sont équilibrées. Si nécessaire, utilisez des techniques comme la suréchantillonnage, la sous-échantillonnage ou SMOTE.
-# Division des données :
-Séparez les données en ensembles d'entraînement et de test.
-# Entraînement des modèles :
-Entraînez plusieurs modèles de classification tels que la régression logistique, les arbres de décision, les forêts aléatoires et les machines à vecteurs de support (SVM).
-# Évaluation des modèles :
-Utilisez des métriques comme l'exactitude, la précision, le rappel, le score F1 et l'AUC-ROC pour évaluer les performances.
-Choisissez le modèle le plus performant pour une analyse plus approfondie.
-# Analyse et interprétation :
+#### Classification  
+- **Création de la Variable Cible** : Identifier la présence d’un équipement (e.g., ascenseur).  
+- **Gestion du Déséquilibre des Classes** : Utiliser des techniques comme SMOTE si nécessaire.  
+- **Entraînement de Modèles** : Tester plusieurs algorithmes (régression logistique, arbres de décision, etc.).  
+- **Évaluation** : Comparer les performances des modèles avec des métriques comme le score F1 et l’AUC-ROC.  
 
-# Modèle de régression :
-Interprétez les coefficients pour comprendre l'impact de chaque variable sur le prix.
-Vérifiez les hypothèses du modèle de régression (linéarité, indépendance des erreurs, homoscédasticité, normalité des résidus).
-# Modèle de classification :
-Analysez l'importance des variables pour identifier les facteurs influençant la présence de l'équipement.
-Interprétez la matrice de confusion pour comprendre les erreurs de classification.
-# Visualisation des données et des résultats :
+### Analyse et Interprétation  
+- Interpréter les coefficients du modèle de régression.  
+- Analyser la matrice de confusion et l’importance des variables pour les modèles de classification.  
 
-Créez des graphiques exploratoires (histogrammes, nuages de points, matrices de corrélation) pour visualiser les distributions et les relations entre les variables.
-Représentez graphiquement les performances des modèles (par exemple, courbes ROC, graphiques des résidus).
-# Amélioration des modèles :
+### Visualisation des Résultats  
+- Créer des graphiques exploratoires (histogrammes, corrélations).  
+- Visualiser les courbes ROC et les graphiques des résidus.  
 
-# Feature Engineering avancé :
-Expérimentez avec des variables polynomiales ou des interactions entre variables pour améliorer le modèle de régression.
-# Optimisation des hyperparamètres :
-Utilisez la validation croisée et des techniques comme Grid Search ou Random Search pour optimiser les hyperparamètres des modèles de classification.
-# Documentation et reproductibilité :
+### Amélioration des Modèles  
+- **Feature Engineering Avancé** : Ajouter des interactions ou des variables polynomiales.  
+- **Optimisation des Hyperparamètres** : Utiliser des techniques comme Grid Search.  
 
-Commentez votre code pour expliquer chaque étape de votre démarche.
-Rédigez un rapport détaillé incluant votre méthodologie, vos analyses, vos résultats et vos conclusions.
-Fournissez un fichier README avec les instructions pour reproduire votre projet.
-# Réflexion sur les implications éthiques et les biais :
+## Documentation et Reproductibilité  
+- Commentez chaque étape de votre code.  
+- Fournissez un rapport détaillé et un fichier `README` clair pour guider les utilisateurs.  
 
-Discutez des éventuels biais présents dans les données et de leur impact sur les modèles.
-Réfléchissez aux implications éthiques de l'utilisation de ces modèles dans un contexte réel.
+## Réflexion sur les Biais et l'Éthique  
+- Identifier les biais dans les données et leur impact sur les modèles.  
+- Réfléchir aux implications éthiques de l’utilisation des modèles dans un contexte réel.  
+
+## Technologies Utilisées  
+- **Python** : Pandas, NumPy, Matplotlib, Scikit-learn  
+- **SQLAlchemy** : Connexion à PostgreSQL  
+- **PostgreSQL** : Gestion de la base de données  
+- **Docker** : Environnement conteneurisé  
+
+## Installation  
+1. Clonez le dépôt :  
+   ```bash  
+   git clone "coupier le lien ssh ou ..."
